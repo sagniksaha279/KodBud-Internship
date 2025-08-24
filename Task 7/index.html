@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator App</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #1e1e2f;
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+    .calculator {
+      width: 320px;
+      background: #2d2d44;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+    }
+    .display {
+      background: #1a1a2e;
+      color: #fff;
+      font-size: 2rem;
+      padding: 20px;
+      text-align: right;
+      border-bottom: 2px solid #444;
+      min-height: 60px;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 15px;
+    }
+    button {
+      padding: 20px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    button:active {
+      transform: scale(0.95);
+    }
+    .btn-operator {
+      background: #ff8c42;
+      color: white;
+    }
+    .btn-equal {
+      background: #06d6a0;
+      color: white;
+      grid-column: span 2;
+    }
+    .btn-clear {
+      background: #ef476f;
+      color: white;
+    }
+    .btn {
+      background: #3a3a55;
+      color: white;
+    }
+
+    /* Footer Styling */
+    .footer {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 1rem;
+      color: #ddd;
+      background: #2d2d44;
+      padding: 10px 20px;
+      border-radius: 12px;
+      box-shadow: 0px 3px 10px rgba(0,0,0,0.3);
+    }
+    .footer h3 {
+      margin: 0;
+      font-weight: normal;
+    }
+    .footer h3 span {
+      color: #ef476f;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="calculator">
+    <div class="display" id="display">0</div>
+    <div class="buttons">
+      <button class="btn-clear" onclick="clearDisplay()">C</button>
+      <button class="btn" onclick="appendValue('%')">%</button>
+      <button class="btn" onclick="deleteLast()">⌫</button>
+      <button class="btn-operator" onclick="appendValue('/')">÷</button>
+
+      <button class="btn" onclick="appendValue('7')">7</button>
+      <button class="btn" onclick="appendValue('8')">8</button>
+      <button class="btn" onclick="appendValue('9')">9</button>
+      <button class="btn-operator" onclick="appendValue('*')">×</button>
+
+      <button class="btn" onclick="appendValue('4')">4</button>
+      <button class="btn" onclick="appendValue('5')">5</button>
+      <button class="btn" onclick="appendValue('6')">6</button>
+      <button class="btn-operator" onclick="appendValue('-')">−</button>
+
+      <button class="btn" onclick="appendValue('1')">1</button>
+      <button class="btn" onclick="appendValue('2')">2</button>
+      <button class="btn" onclick="appendValue('3')">3</button>
+      <button class="btn-operator" onclick="appendValue('+')">+</button>
+
+      <button class="btn" onclick="appendValue('0')">0</button>
+      <button class="btn" onclick="appendValue('.')">.</button>
+      <button class="btn-equal" onclick="calculate()">=</button>
+    </div>
+  </div>
+   <br><br><br>
+  <div class="footer">
+    <h3>Made with <span>&hearts;</span> and Code - <strong>Sagnik Saha</strong></h3>
+  </div>
+
+  <script>
+    let display = document.getElementById('display');
+
+    function appendValue(value) {
+      if (display.innerText === "0") {
+        display.innerText = value;
+      } else {
+        display.innerText += value;
+      }
+    }
+    function clearDisplay() {
+      display.innerText = "0";
+    }
+    function deleteLast() {
+      display.innerText = display.innerText.slice(0, -1) || "0";
+    }
+    function calculate() {
+      try {
+        display.innerText = eval(display.innerText.replace('÷','/').replace('×','*'));
+      } catch {
+        display.innerText = "Error";
+      }
+    }
+  </script>
+</body>
+</html>
